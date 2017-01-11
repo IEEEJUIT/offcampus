@@ -1,0 +1,359 @@
+<html>
+    <head>
+        <title>IEEE Web Team Project</title>
+    </head>
+    <body>
+<script type='text/javascript' src='http://www.indeed.co.in/ads/jobroll-widget-v3.js'></script>
+<style type='text/css'>
+    #indJobContent {
+        padding-bottom: 5px;
+    }
+    #indJobContent .company_location{
+        font-size: 11px;
+        overflow: hidden;
+    }
+    #indJobContent .job {
+        display:block;
+        overflow: hidden;
+    }
+    #indeed_widget_wrapper {
+        position: relative;
+        font-family: Arial,sans-serif;
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 18px;
+        padding: 5px;
+        overflow: hidden;
+        border: 1px solid #AAAAAA;
+        color: #000000;
+        background-color: #F2F2F2;
+    }
+    #indeed_widget_wrapper, #indeed_link a{
+        color: #000000;
+        text-decoration: none;
+    }
+    .indeed_search_wrapper {
+        clear: both;
+        font-size: 15px;
+    }
+    .indeed_search_wrapper label {
+        line-height: inherit;
+        text-align: left;
+        padding: 5px;
+    }
+    .indeed_search_wrapper input[type='text'] {
+        font-size: 12px;
+    }
+    .indeed_search_wrapper .qc {
+        float:left;
+    }
+    .indeed_search_wrapper .lc {
+        float:left;
+    }
+    #indeed_link {
+        position: absolute;
+        bottom: 1px;
+        right: 5px;
+        clear: both;
+        font-size: 12px;
+    }
+    #results .job {
+        padding: 5px;
+    }
+    #pagination {
+        clear: both;
+        font-size: 16px;
+        padding: 5px;
+    }
+    .jobtitle {
+        font-size: 16px;
+    }
+    .company {
+        font-size: 15px;
+    }
+    .location {
+        font-size: 15px;
+        color: #666;
+    }
+    .job_age {
+        font-size: 13px;
+        color: gray;
+    }
+    .iaLabel {
+        color: #f60;
+    }
+    #indJobContent a {
+        color: #00c;
+    }
+    #indeed_widget_header{
+        font-size: 18px;
+        padding-bottom: 5px;
+        color: #000000;
+    }
+</style>
+<script type='text/javascript'>
+    var ind_pub = '1637952116847595';
+    var ind_el = 'indJobContent';
+    var ind_pf = '';
+    var ind_q = 'Designer';
+    
+    var ind_l = Delhi;
+    
+    
+    var ind_chnl = 'none';
+    
+    var ind_n = 10;
+    var ind_d = 'http://www.indeed.co.in';
+    var ind_t = 40;
+    var ind_c = 30;
+    var ind_age = '1';
+    var ind_snp = '1';
+    var ind_iaTxt = 1;
+    
+    var ind_pgn = 1;
+    var ind_pgnCnt = 5;
+    
+    function setDefaultSearches() {
+        var q = args['q'];
+        var l = args['l'];
+        var queryInputs = document.getElementsByClassName('q');
+        for (var i=0; i < queryInputs.length; i++) {
+            queryInputs[i].value = q ? q : '';
+        }
+        var locInputs = document.getElementsByClassName('l');
+        for (var i=0; i < locInputs.length; i++) {
+            locInputs[i].value = l ? l : '';
+        }
+    }
+    var args = {};
+    if (document.location.search.length > 0) {
+        var q = document.location.search.substring(1).split('&');
+        for (i = 0; i < q.length; i++) {
+            var p = unescape(q[i]);
+            if (p.indexOf('=') == -1) {
+                args[p.trim()] = true;
+            } else {
+                var kv = p.split('=');
+                args[kv[0].trim()] = kv[1].trim();
+            }
+        }
+    }
+    function clearDefaults(which_form){
+        var formInputs=document.getElementsByClassName('indeed_jobform')[which_form].elements;
+        for(var i=0;i<formInputs.length;i++){
+            if(formInputs[i].value=='title, keywords' || formInputs[i].value=='city, state, or zip'){
+                formInputs[i].value='';
+            }
+        }
+    }
+    function runSearch(which_form){
+        var formInputs=document.getElementsByClassName('indeed_jobform')[which_form].elements;
+        for(var i=0;i<formInputs.length;i++){
+            if(formInputs[i].name == 'q') {
+                window.ind_q = formInputs[i].value;
+            } else if(formInputs[i].name == 'l') {
+                window.ind_l = formInputs[i].value;
+            }
+        }
+        // make the other form match
+        formInputs=document.getElementsByClassName('indeed_jobform')[which_form ? 0 : 1].elements;
+        for(var i=0;i<formInputs.length;i++){
+            if(formInputs[i].name == 'q') {
+                formInputs[i].value = window.ind_q;
+            } else if(formInputs[i].name == 'l') {
+                formInputs[i].value = window.ind_l;
+            }
+        }
+        document.cookie = 'IND_RQ=q=' + window.ind_q + '&l=' + window.ind_l;
+        document.getElementById('results').style.opacity = 0.3;
+        window.ind_nr = 1;
+        window.indeedJobroll.getJobs(0);
+        window.scrollTo(0,0);
+    }
+</script>
+<div id='indeed_widget_wrapper' style=''>
+    <!--<div id='indeed_widget_header'>Jobs from Indeed</div>
+    <div class='indeed_search_wrapper'>
+        <form onsubmit='clearDefaults(0);runSearch(0);return false;' method='get' class='indeed_jobform' target="_new">
+            <div class="qc"><label>What:</label><input type='text' onfocus='this.value=""' value='title, keywords' name='q' class='q'></div>
+            <div class="lc"><label>Where:</label><input type='text' onfocus='this.value=""' value='city, state, or pin' name='l' class='l'></div>
+
+            <div style='float:left'><input type='submit' value='Find Jobs' class='findjobs'></div>
+        </form>
+    </div>
+    <br/><br/>
+    <div id='indJobContent' class=""></div>
+    <div class='indeed_search_wrapper'>
+        <form onsubmit='clearDefaults(1);runSearch(1);return false;' method='get' class='indeed_jobform' target="_new">
+            <div class="qc"><label>What:</label><input type='text' onfocus='this.value=""' value='title, keywords' name='q' class='q'></div>
+            <div class="lc"><label>Where:</label><input type='text' onfocus='this.value=""' value='city, state, or pin' name='l' class='l'></div>
+
+            <div style='float:left'><input type='submit' value='Find Jobs' class='findjobs'></div>
+        </form>
+    </div>
+    <div id='indeed_link'>
+        <a title="Job Search" href="http://www.indeed.co.in/?indpubnum=1637952116847595" target="_new">jobs by <img alt=Indeed src='https://www.indeed.com/p/jobsearch.gif' style='border: 0;vertical-align: bottom;'>
+        </a>
+    </div>-->
+<!--==========-->
+    <div id="indeed_widget_header">Jobs from Indeed</div>
+    <div class="indeed_search_wrapper">
+        <form onsubmit="clearDefaults(0);runSearch(0);return false;" method="get" class="indeed_jobform" target="_new">
+            <div class="qc"><label>What:</label><input onfocus="this.value=&quot;&quot;" value="title, keywords" name="q" class="q" type="text"></div>
+            <div class="lc"><label>Where:</label><input onfocus="this.value=&quot;&quot;" value="city, state, or pin" name="l" class="l" type="text"></div>
+
+            <div style="float:left"><input value="Find Jobs" class="findjobs" type="submit"></div>
+        </form>
+    </div>
+    <br><br>
+    <div id="indJobContent" class=""><div id="results">
+<div id="job_0" class="job">
+    <a target="_blank" href="//www.indeed.co.in/viewjob?t=Bank+Associate+Organize+Walk+Interview&amp;c=national+institute+in+professional&amp;l=Bhubaneshwar%2C+Orissa&amp;jk=6541a88771c97e32&amp;indpubnum=1637952116847595&amp;atk=" class="jobtitle">2016-2017 Bank Associates Organize A...</a><br>
+    <span class="company_location">
+        <span class="company">national institute in...</span> -
+        <span class="location">Bhubaneshwar, Orissa</span>
+   </span>
+        <br>
+        <span class="snippet">Phone Banking is a low cost, Direct banking Channel of Bank providing uniform and consistently high standards of service delivery...</span>
+        <br>
+        <span class="iaLabel">Apply securely with Indeed Resume</span>
+        <br>
+        <span class="job_age">13 hours ago</span>
+</div>
+<div id="job_1" class="job">
+    <a target="_blank" href="//www.indeed.co.in/viewjob?t=Clerk+Cum+Cashier&amp;c=Axis+bank&amp;l=Gaya%2C+Bihar&amp;jk=e76f20dbf911770f&amp;indpubnum=1637952116847595&amp;atk=" class="jobtitle">Clerk cum Cashier</a><br>
+    <span class="company_location">
+        <span class="company">Axis bank</span> -
+        <span class="location">Gaya, Bihar</span>
+   </span>
+        <br>
+        <span class="snippet">I give 100% work in this company.and very honest work Job Type: Full-time Salary: ₹15,000.00 /month Job Location: * Gaya, Bihar</span>
+        <br>
+        <span class="iaLabel">Apply securely with Indeed Resume</span>
+        <br>
+        <span class="job_age">30+ days ago</span>
+</div>
+<div id="job_2" class="job">
+    <a target="_blank" href="//www.indeed.co.in/viewjob?t=Kotak+Mahindra+Bank&amp;c=Hound+Search&amp;l=Pune%2C+Maharashtra&amp;jk=10619bf4b3197bd1&amp;indpubnum=1637952116847595&amp;atk=" class="jobtitle">Kotak Mahindra Bank Ltd.</a><br>
+    <span class="company_location">
+        <span class="company">Hound Search</span> -
+        <span class="location">Pune, Maharashtra</span>
+   </span>
+        <br>
+        <span class="snippet">Permanent opening in Kotak Mahindra Bank Ltd.*. 9:30 am to 7:00 pm*. 1.60 LPA to 3 LPA Unlimited Intensive....</span>
+        <br>
+        <span class="iaLabel">Apply securely with Indeed Resume</span>
+        <br>
+        <span class="job_age">5 days ago</span>
+</div>
+<div id="job_3" class="job">
+    <a target="_blank" href="//www.indeed.co.in/viewjob?t=Requirement+Bandhan+Bank&amp;c=EXCELL+CORPORATE&amp;l=Bhubaneshwar%2C+Orissa&amp;jk=061bad9ffd4b43c2&amp;indpubnum=1637952116847595&amp;atk=" class="jobtitle">Requirement of Bandhan Bank</a><br>
+    <span class="company_location">
+        <span class="company">EXCELL CORPORATE</span> -
+        <span class="location">Bhubaneshwar, Orissa</span>
+   </span>
+        <br>
+        <span class="snippet">_*Venue- M-33, 1st floor, H B colony,Fire Station,Barmunda, 751003*_. _*Requirement of Bandhan Bank*_....</span>
+        <br>
+        <span class="iaLabel">Apply securely with Indeed Resume</span>
+        <br>
+        <span class="job_age">4 days ago</span>
+</div>
+<div id="job_4" class="job">
+    <a target="_blank" href="//www.indeed.co.in/viewjob?t=Executive+Assistant&amp;c=Milk+Mantra+Dairy&amp;l=Bhubaneshwar%2C+Orissa&amp;jk=81b16387819c66c8&amp;indpubnum=1637952116847595&amp;atk=" class="jobtitle">Executive Assistant</a><br>
+    <span class="company_location">
+        <span class="company">Milk Mantra Dairy</span> -
+        <span class="location">Bhubaneshwar, Orissa</span>
+   </span>
+        <br>
+        <span class="snippet">Working cross functionally with the CxO team on business reviews &amp; execution. A Business Enabler driving decision making and business...</span>
+        <br>
+        <span class="iaLabel">Apply securely with Indeed Resume</span>
+        <br>
+        <span class="job_age">22 days ago</span>
+</div>
+<div id="job_5" class="job">
+    <a target="_blank" href="//www.indeed.co.in/viewjob?t=Non+Voice+Bpo&amp;c=SBL&amp;l=Madurai%2C+Tamil+Nadu&amp;jk=5b33ac36885c49e9&amp;indpubnum=1637952116847595&amp;atk=" class="jobtitle">Wanted Non Voice BPO - Madurai ( Day...</a><br>
+    <span class="company_location">
+        <span class="company">SBL Ltd</span> -
+        <span class="location">Madurai, Tamil Nadu</span>
+   </span>
+        <br>
+        <span class="snippet">Interested candidates can walk in to the below mentioned address. We take pride in our exponential growth since our inception in 2005...</span>
+        <br>
+        <span class="iaLabel">Apply securely with Indeed Resume</span>
+        <br>
+        <span class="job_age">3 days ago</span>
+</div>
+<div id="job_6" class="job">
+    <a target="_blank" href="//www.indeed.co.in/viewjob?t=Jindal+Steel+%26power+Orissa&amp;c=KS+CAREER+SOLUTION&amp;l=Bhubaneshwar%2C+Orissa&amp;jk=2f65fbd816413c53&amp;indpubnum=1637952116847595&amp;atk=" class="jobtitle">JINDAL STEEL &amp;POWER IN ORISSA</a><br>
+    <span class="company_location">
+        <span class="company">KS CAREER SOLUTION</span> -
+        <span class="location">Bhubaneshwar, Orissa</span>
+   </span>
+        <br>
+        <span class="snippet">17, DISTRICT CENTER-CHANDRASEKHARPUR,NEAR BHARAT PETROL PUMP(BACK SIDE) BHARAT GAS BUILDING, 3RD FLOOR, BHUBANESWAR, PIN-751021,ODISHA....</span>
+        <br>
+        <span class="iaLabel">Apply securely with Indeed Resume</span>
+        <br>
+        <span class="job_age">30+ days ago</span>
+</div>
+<div id="job_7" class="job">
+    <a target="_blank" href="//www.indeed.co.in/viewjob?t=Customer+Support+Profile+Cochin&amp;c=FEDERAL+BANK&amp;l=Kochi%2C+Kerala&amp;jk=a611a050fb3b2169&amp;indpubnum=1637952116847595&amp;atk=" class="jobtitle">Federal bank is hiring for customer...</a><br>
+    <span class="company_location">
+        <span class="company">FEDERAL BANK</span> -
+        <span class="location">Kochi, Kerala</span>
+   </span>
+        <br>
+        <span class="snippet">We have some immediate requirement for the position of customer relationship officer for federal bank process in cochin....</span>
+        <br>
+        <span class="iaLabel">Apply securely with Indeed Resume</span>
+        <br>
+        <span class="job_age">10 days ago</span>
+</div>
+<div id="job_8" class="job">
+    <a target="_blank" href="//www.indeed.co.in/viewjob?t=Without+Interview+Selection+Amazon+Company&amp;c=naukriglobe.com&amp;l=Ludhiana%2C+Punjab&amp;jk=adcc868d4ad87275&amp;indpubnum=1637952116847595&amp;atk=" class="jobtitle">WITHOUT INTERVIEW SELECTION AMAZON...</a><br>
+    <span class="company_location">
+        <span class="company">naukriglobe.com</span> -
+        <span class="location">Ludhiana, Punjab</span>
+   </span>
+        <br>
+        <span class="snippet">REQUIRED BOYS AND GIRLS** GOOD COMPUTER KNOWLEDGE BASIC** QUALIFICATION- 10th TO 10+2** SALARY –16000/- TO 25,000/-** Name;- HR...</span>
+        <br>
+        <span class="iaLabel">Apply securely with Indeed Resume</span>
+        <br>
+        <span class="job_age">11 days ago</span>
+</div>
+<div id="job_9" class="job">
+    <a target="_blank" href="//www.indeed.co.in/viewjob?t=Requirment+Tata+Steel&amp;c=GROWTH+LIFE&amp;l=Ranchi%2C+Jharkhand&amp;jk=8e67aca2bf8b0fd2&amp;indpubnum=1637952116847595&amp;atk=" class="jobtitle">REQUIRMENT IN TATA STEEL LIMITED</a><br>
+    <span class="company_location">
+        <span class="company">GROWTH LIFE</span> -
+        <span class="location">Ranchi, Jharkhand</span>
+   </span>
+        <br>
+        <span class="snippet">Resume.2) 3 passport size photo.3) Qualification Certificate Xerox.4) Identity and Address proof xerox.5) Experience certificate (if...</span>
+        <br>
+        <span class="iaLabel">Apply securely with Indeed Resume</span>
+        <br>
+        <span class="job_age">18 days ago</span>
+</div>
+</div></div>
+    <div class="indeed_search_wrapper">
+        <form onsubmit="clearDefaults(1);runSearch(1);return false;" method="get" class="indeed_jobform" target="_new">
+            <div class="qc"><label>What:</label><input onfocus="this.value=&quot;&quot;" value="title, keywords" name="q" class="q" type="text"></div>
+            <div class="lc"><label>Where:</label><input onfocus="this.value=&quot;&quot;" value="city, state, or pin" name="l" class="l" type="text"></div>
+
+            <div style="float:left"><input value="Find Jobs" class="findjobs" type="submit"></div>
+        </form>
+    </div>
+    <div id="indeed_link">
+        <a title="Job Search" href="http://www.indeed.co.in/?indpubnum=1637952116847595" target="_new">jobs by <img alt="Indeed" src="https://www.indeed.com/p/jobsearch.gif" style="border: 0;vertical-align: bottom;">
+        </a>
+    </div>
+    <script type="text/javascript">
+        setDefaultSearches();
+    </script>
+</div>
+        <!--<script type="text/javascript" src="http://gdc.indeed.com/ads/apiresults.js"></script>-->
+    </body>
+</html>
