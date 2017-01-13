@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript" src="http://gdc.indeed.com/ads/apiresults.js"></script>
+                                    
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl"> 
+
+<p>Today's welcome message is:</p>
+
+<h1>{{myWelcome}}</h1>
+<div ng-if="!myWelcome">
+  Loading results...
+</div>
+<!--<div ng-repeat="data in myWelcome">Hi</div>-->
+
+</div>
+
+<p>The $http service requests a page on the server, and the response is set as the value of the "myWelcome" variable.</p>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+//   $http.get("http://www.omdbapi.com/?s=love")
+//   $http.get("http://api.indeed.com/ads/apisearch?publisher=1637952116847595&v=2&format=json")
+//   $http.get("https://public-api.wordpress.com/rest/v1.1/sites/en.blog.wordpress.com/posts")
+// $http.get("https://jobs.github.com/positions.json?description=python&location=new+york")
+   // $http.get("http://api.indeed.com/ads/apigetjobs?publisher=1637952116847595&jobkeys=5e50b56a7e69073c&v=2&format=json")
+  $http.get("http://api.careerbuilder.com/v2/jobsearch?DeveloperKey=WDHN5J75ZPHLGQVZHDN8&outputjson=true")
+  .then(function(response) {
+      $scope.myWelcome = response.data;
+  });
+});
+</script>
+
+</body>
+</html>
