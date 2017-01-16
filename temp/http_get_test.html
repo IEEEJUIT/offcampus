@@ -31,6 +31,9 @@ app.controller('myCtrl', function($scope, $http) {
   .then(function(response) {
       $scope.myWelcome = response.data;
   });
+  // .success(function(response) {
+  //     $scope.myWelcome = response;
+  // });
 });
 </script>
 
